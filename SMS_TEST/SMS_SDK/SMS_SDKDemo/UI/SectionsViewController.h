@@ -1,0 +1,42 @@
+
+
+#import <UIKit/UIKit.h>
+
+#import <SMS_SDK/CountryAndAreaCode.h>
+
+//选择国家或地区的页面，tableView和搜索功能
+
+@protocol SecondViewControllerDelegate;
+
+@interface SectionsViewController : UIViewController
+<UITableViewDataSource, UITableViewDelegate,UISearchBarDelegate>
+{
+    UITableView *table;
+    UISearchBar *search;
+    NSDictionary *allNames;
+    NSMutableDictionary *names;
+    NSMutableArray  *keys;    
+    
+    BOOL    isSearching;
+}
+
+@property (nonatomic, strong)  UITableView *table;
+@property (nonatomic, strong)  UISearchBar *search;
+@property (nonatomic, strong) NSDictionary *allNames;
+@property (nonatomic, strong) NSMutableDictionary *names;
+@property (nonatomic, strong) NSMutableArray *keys;
+
+@property (nonatomic, strong) id<SecondViewControllerDelegate> delegate;
+@property(nonatomic,strong)  UIToolbar* toolBar;
+
+- (void)resetSearch;
+- (void)handleSearchForTerm:(NSString *)searchTerm;
+-(void)setAreaArray:(NSMutableArray*)array;
+
+@end
+
+@protocol SecondViewControllerDelegate <NSObject>
+- (void)setSecondData:(CountryAndAreaCode *)data;
+@end
+
+
